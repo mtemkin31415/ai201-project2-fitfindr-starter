@@ -212,8 +212,16 @@ For each tool, describe the specific failure mode you're handling and what the a
      before trusting it" is a plan. -->
 
 **Milestone 3 — Individual tool implementations:**
-
+I'll categorize the planning.md page and double check the requirements for each tool before handing off to Claude code. I will go over how the AI plans to solve each problem before it implements them
 **Milestone 4 — Planning loop and state management:**
+I'll go over the planning.md page and make sure I understand the looping process and the terms for when the AI ends before handing it off to claude code. I'll read it's description of the methods its creates and double check the code for correctness
+
+
+Milestone 5 - Run  suggest_outfit without an wardrobe
+I'm so excited about this Y2K baby tee. It's perfect for adding a playful touch to your outfits. This top pairs well with high-waisted pants, skirts, or shorts for a cute, retro-inspired look. It suits a laid-back, casual vibe, and you can easily dress it up or down. Try pairing it with some distressed denim jeans and sneakers for a relaxed, everyday look, or with a flowy skirt and sandals for a sweet, summery outfit. Either way, the butterfly graphic will add a fun, whimsical touch to your overall style.
+"
+create_fit_card with an empty string:
+Sorry, I can't make a fit card without an outfit to describe. Want help putting one together or finding other pieces first
 
 ---
 

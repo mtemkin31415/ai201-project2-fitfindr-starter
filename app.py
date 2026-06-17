@@ -43,8 +43,55 @@ def handle_query(user_query: str, wardrobe_choice: str) -> tuple[str, str, str]:
            string and return it along with session["outfit_suggestion"] and
            session["fit_card"].
     """
-    # TODO: implement this function
-    return "Agent not yet implemented.", "", ""
+    # 1. Guard against an empty / whitespace-only query.
+    if not user_query or not user_query.strip():
+        return "Please enter what you're looking for.", "", ""
+
+    # 2. Select the wardrobe based on the radio choice.
+    wardrobe = (
+        get_example_wardrobe()
+        if wardrobe_choice == "Example wardrobe"
+        else get_empty_wardrobe()
+    )
+
+    # 3. Run the planning loop.
+    session = run_agent(user_query, wardrobe)
+
+    # 4. If the interaction ended early, show the error in the first panel.
+    if session["error"]:
+        return session["error"], "", ""
+
+    # 5. Format the selected listing and return all three panels.
+    return (
+        _format_listing(session["selected_item"]),
+        session["outfit_suggestion"] or "",
+        session["fit_card"] or "",
+    )
+
+
+def _format_listing(item: dict) -> str:
+    """Format a listing dict into a readable multi-line string for the UI."""
+    if not item:
+        return "No listing found."
+
+    lines = [item.get("title", "Untitled listing")]
+
+    price = item.get("price")
+    if isinstance(price, (int, float)):
+        lines.append(f"Price: ${price:.0f}")
+    if item.get("brand"):
+        lines.append(f"Brand: {item['brand']}")
+    if item.get("size"):
+        lines.append(f"Size: {item['size']}")
+    if item.get("condition"):
+        lines.append(f"Condition: {item['condition']}")
+    if item.get("platform"):
+        lines.append(f"Platform: {item['platform']}")
+    if item.get("description"):
+        lines.append("")
+        lines.append(item["description"])
+
+    return "\n".join(lines)
 
 
 # ── interface ─────────────────────────────────────────────────────────────────
